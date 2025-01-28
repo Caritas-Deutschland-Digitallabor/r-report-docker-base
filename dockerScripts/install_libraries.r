@@ -1,0 +1,2 @@
+options(install.packages.compile.from.source = "always")
+install.packages(c('purrr', 'rmarkdown', 'stringr', 'openssl', 'testthat', 'ggplot2', 'base64enc', 'ggrepel', 'xml2', 'readr', 'forcats', 'lubridate', 'tidyr', 'jsonlite', 'httr', 'patchwork', 'nleqslv', 'ggforce', 'broom', 'scales', 'pdftools'), type = "both")

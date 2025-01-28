@@ -1,4 +1,4 @@
-FROM rocker/tidyverse
+FROM r-base
 COPY . /usr/local/src/scripts
 WORKDIR /usr/local/src/scripts
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \

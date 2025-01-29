@@ -1,5 +1,6 @@
 options(install.packages.compile.from.source = "always")
-install.packages(c('dplyr',
+install.packages(c('renv',
+                   'dplyr',
                    'htmltools',
                    'DBI',
                    'purrr', 

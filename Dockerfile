@@ -7,7 +7,8 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libicu-dev \
     libcurl4-openssl-dev \
     libssl-dev \
-    libpoppler-cpp-dev
+    libpoppler-cpp-dev \
+    libxml-2.0
 
 # R-Pakete installieren
 RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \

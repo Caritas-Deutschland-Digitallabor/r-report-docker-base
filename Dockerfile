@@ -21,6 +21,9 @@ RUN R -e "options(install.packages.compile.from.source = 'always'); install.pack
 RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
     'gridExtra', 'RColorBrewer'))"
 
+# Dependency für RPostgres installieren
+RUN apt-get update && apt-get install -y libpq-dev
+    
 # R-Pakete installieren - 2. Layer - langfristig in 1. Layer übernehmen
 RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
     'RPostgres'))"

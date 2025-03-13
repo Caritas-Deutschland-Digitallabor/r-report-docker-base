@@ -9,29 +9,13 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libssl-dev \
     libpoppler-cpp-dev \
     libxml2 \
-    libxml2-dev
+    libxml2-dev \
+    libpq-dev && \
+    rm -rf /var/lib/apt/lists/*
 
-# R-Pakete installieren
+# R-Pakete installieren in einem einzigen Schritt
 RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
     'renv', 'dplyr', 'htmltools', 'DBI', 'purrr', 'rmarkdown', 'stringr', 'openssl', \
     'testthat', 'ggplot2', 'base64enc', 'ggrepel', 'xml2', 'readr', 'forcats', 'lubridate', \
-    'tidyr', 'jsonlite', 'httr', 'patchwork', 'nleqslv', 'ggforce', 'broom', 'scales', 'pdftools'))"
-
-# R-Pakete installieren - 2. Layer - langfristig in 1. Layer übernehmen
-RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
-    'gridExtra', 'RColorBrewer'))"
-
-# Dependency für RPostgres installieren
-RUN apt-get update && apt-get install -y libpq-dev
-    
-# R-Pakete installieren - 2. Layer - langfristig in 1. Layer übernehmen
-RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
-    'RPostgres'))"
-
-# R-Pakete installieren - 2. Layer - langfristig in 1. Layer übernehmen
-RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
-    'dbplyr'))"
-
-# R-Pakete installieren - 2. Layer - langfristig in 1. Layer übernehmen
-RUN R -e "options(install.packages.compile.from.source = 'always'); install.packages(c( \
-    'openxlsx', 'openxlsx2', 'aws.s3'))"
+    'tidyr', 'jsonlite', 'httr', 'patchwork', 'nleqslv', 'ggforce', 'broom', 'scales', 'pdftools', \
+    'gridExtra', 'RColorBrewer', 'RPostgres', 'dbplyr', 'openxlsx', 'openxlsx2', 'aws.s3'))"

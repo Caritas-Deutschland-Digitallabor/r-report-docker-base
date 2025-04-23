@@ -18,4 +18,4 @@ RUN R -e "options(install.packages.compile.from.source = 'always'); install.pack
     'renv', 'dplyr', 'htmltools', 'DBI', 'purrr', 'rmarkdown', 'stringr', 'openssl', \
     'testthat', 'ggplot2', 'base64enc', 'ggrepel', 'xml2', 'readr', 'forcats', 'lubridate', \
     'tidyr', 'jsonlite', 'httr', 'patchwork', 'nleqslv', 'ggforce', 'broom', 'scales', 'pdftools', \
-    'gridExtra', 'RColorBrewer', 'RPostgres', 'dbplyr', 'openxlsx', 'openxlsx2', 'aws.s3'))"
+    'gridExtra', 'RColorBrewer', 'RPostgres', 'dbplyr', 'openxlsx', 'openxlsx2', 'aws.s3', 'ggforce'))"

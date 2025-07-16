@@ -17,15 +17,15 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     rm -rf /var/lib/apt/lists/*
 
 # R-Pakete installieren in einem einzigen Schritt
-RUN R -e "options(install.packages.compile.from.source = 'default'); \
-  pkgs <- c( \
-    'shiny', 'renv', 'dplyr', 'htmltools', 'DBI', 'purrr', 'rmarkdown', 'stringr', 'openssl', \
-    'testthat', 'ggplot2', 'base64enc', 'ggrepel', 'xml2', 'readr', 'forcats', 'lubridate', \
-    'tidyr', 'jsonlite', 'httr', 'httr2', 'patchwork', 'nleqslv', 'ggforce', 'broom', 'scales', \
-    'pdftools', 'gridExtra', 'RColorBrewer', 'RPostgres', 'dbplyr', 'openxlsx', 'openxlsx2', \
-    'aws.s3', 'tidytext', 'ggwordcloud', 'svglite', 'shinycssloaders', 'config'); \
-  install.packages(pkgs, dependencies = TRUE); \
+RUN R -e "options(repos = c(RSPM = 'https://packagemanager.posit.co/cran/latest'), \
+                 install.packages.compile.from.source = 'never'); \
+  pkgs <- c('shiny', 'renv', 'htmltools', 'DBI', 'openssl', \
+           'base64enc', 'ggrepel', 'patchwork', 'nleqslv', 'ggforce', \
+           'scales', 'pdftools', 'gridExtra', 'RColorBrewer', 'RPostgres', \
+           'openxlsx', 'openxlsx2', 'aws.s3', 'tidytext', 'ggwordcloud', \
+           'svglite', 'shinycssloaders', 'config'); \
+  to_install <- setdiff(pkgs, rownames(installed.packages())); \
+  if (length(to_install)) install.packages(to_install); \
   missing <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]; \
-  if (length(missing) > 0) { stop('Fehlende Pakete: ', paste(missing, collapse = ', ')) }"
-
+  if (length(missing)) stop('Fehlende Pakete: ', paste(missing, collapse = ', '))"
 

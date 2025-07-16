@@ -1,31 +1,33 @@
-FROM r-base
+FROM rocker/tidyverse:latest
 
-# Systemabhängige Bibliotheken installieren
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
-    make \
     libsodium-dev \
     libicu-dev \
     libcurl4-openssl-dev \
     libssl-dev \
     libpoppler-cpp-dev \
-    libxml2 \
     libxml2-dev \
     libpq-dev \
     libgfortran5 \
     libblas-dev \
-    liblapack-dev && \
-    rm -rf /var/lib/apt/lists/*
+    liblapack-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfontconfig1-dev \
+    libtiff5-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# R-Pakete installieren in einem einzigen Schritt
-RUN R -e "options(repos = c(RSPM = 'https://packagemanager.posit.co/cran/latest'), \
-                 install.packages.compile.from.source = 'never'); \
+RUN R -e "options(repos = c(RSPM = 'https://packagemanager.posit.co/cran/latest')); \
   pkgs <- c('shiny', 'renv', 'htmltools', 'DBI', 'openssl', \
            'base64enc', 'ggrepel', 'patchwork', 'nleqslv', 'ggforce', \
            'scales', 'pdftools', 'gridExtra', 'RColorBrewer', 'RPostgres', \
            'openxlsx', 'openxlsx2', 'aws.s3', 'tidytext', 'ggwordcloud', \
            'svglite', 'shinycssloaders', 'config'); \
   to_install <- setdiff(pkgs, rownames(installed.packages())); \
-  if (length(to_install)) install.packages(to_install); \
+  try(install.packages(to_install, type = 'binary'), silent = TRUE); \
+  still_missing <- setdiff(pkgs, rownames(installed.packages())); \
+  if (length(still_missing)) install.packages(still_missing, type = 'source'); \
   missing <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]; \
   if (length(missing)) stop('Fehlende Pakete: ', paste(missing, collapse = ', '))"
-

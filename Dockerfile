@@ -14,7 +14,7 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     rm -rf /var/lib/apt/lists/*
 
 # R-Pakete installieren in einem einzigen Schritt
-RUN R -e "options(install.packages.compile.from.source = 'always'); \
+RUN R -e "options(install.packages.compile.from.source = 'default'); \
   pkgs <- c( \
     'tidyverse', 'renv', 'dplyr', 'htmltools', 'DBI', 'purrr', 'rmarkdown', 'stringr', 'openssl', \
     'testthat', 'ggplot2', 'base64enc', 'ggrepel', 'xml2', 'readr', 'forcats', 'lubridate', \

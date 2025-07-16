@@ -11,6 +11,9 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libxml2 \
     libxml2-dev \
     libpq-dev && \
+    libgfortran5 \
+    libblas-dev \
+    liblapack-dev \
     rm -rf /var/lib/apt/lists/*
 
 # R-Pakete installieren in einem einzigen Schritt

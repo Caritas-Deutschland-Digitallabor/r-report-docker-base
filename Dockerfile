@@ -16,7 +16,7 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
 # R-Pakete installieren in einem einzigen Schritt
 RUN R -e "options(install.packages.compile.from.source = 'default'); \
   pkgs <- c( \
-    'tidyverse', 'renv', 'dplyr', 'htmltools', 'DBI', 'purrr', 'rmarkdown', 'stringr', 'openssl', \
+    'shiny', 'renv', 'dplyr', 'htmltools', 'DBI', 'purrr', 'rmarkdown', 'stringr', 'openssl', \
     'testthat', 'ggplot2', 'base64enc', 'ggrepel', 'xml2', 'readr', 'forcats', 'lubridate', \
     'tidyr', 'jsonlite', 'httr', 'httr2', 'patchwork', 'nleqslv', 'ggforce', 'broom', 'scales', \
     'pdftools', 'gridExtra', 'RColorBrewer', 'RPostgres', 'dbplyr', 'openxlsx', 'openxlsx2', \

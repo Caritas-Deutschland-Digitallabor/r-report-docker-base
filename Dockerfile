@@ -31,3 +31,10 @@ RUN R -e "options(repos = c(RSPM = 'https://packagemanager.posit.co/cran/latest'
   if (length(still_missing)) install.packages(still_missing, type = 'source'); \
   missing <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]; \
   if (length(missing)) stop('Fehlende Pakete: ', paste(missing, collapse = ', '))"
+
+# Windows Schriften installieren
+RUN apt-get update && \
+    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections && \
+    apt-get install -y --no-install-recommends ttf-mscorefonts-installer && \
+    fc-cache -f -v && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*

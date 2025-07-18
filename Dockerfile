@@ -24,7 +24,8 @@ RUN R -e "options(repos = c(RSPM = 'https://packagemanager.posit.co/cran/latest'
            'base64enc', 'ggrepel', 'patchwork', 'nleqslv', 'ggforce', \
            'scales', 'pdftools', 'gridExtra', 'RColorBrewer', 'RPostgres', \
            'openxlsx', 'openxlsx2', 'aws.s3', 'tidytext', 'ggwordcloud', \
-           'svglite', 'shinycssloaders', 'config', 'stopwords'); \
+           'svglite', 'shinycssloaders', 'config', 'stopwords', 'tm',
+					 'SnowballC'); \
   to_install <- setdiff(pkgs, rownames(installed.packages())); \
   try(install.packages(to_install, type = 'binary'), silent = TRUE); \
   still_missing <- setdiff(pkgs, rownames(installed.packages())); \
